@@ -88,6 +88,15 @@
                           animated:animated];
 }
 
+- (void)scrollToBottomAnimated:(BOOL)animated {
+    [_contentView setContentOffset:CGPointMake(0, self.contentView.parallaxHeader.height)
+                          animated:animated];
+}
+
+-(void)toggleContentViewScrolling:(BOOL)canScroll{
+    [_contentView setScrollEnabled:canScroll];
+}
+
 #pragma mark Layout
 
 - (void)layoutSubviews {
