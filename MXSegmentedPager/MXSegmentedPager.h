@@ -34,7 +34,10 @@ typedef NS_ENUM(NSInteger, MXSegmentedControlPosition) {
     /** Top position. */
     MXSegmentedControlPositionTop,
     /** Bottom position. */
-    MXSegmentedControlPositionBottom
+    MXSegmentedControlPositionBottom,
+    /** Top Over position. */
+    MXSegmentedControlPositionTopOver
+
 };
 
 @class MXSegmentedPager;
@@ -68,6 +71,26 @@ typedef NS_ENUM(NSInteger, MXSegmentedControlPosition) {
  @param index          The selected page index.
  */
 - (void)segmentedPager:(MXSegmentedPager *)segmentedPager didSelectViewWithIndex:(NSInteger)index;
+
+/**
+ Tells the delegate the segmented pager is about to draw a page for a particular index.
+ A segmented page view sends this message to its delegate just before it uses page to draw a index, thereby permitting the delegate to customize the page object before it is displayed.
+ 
+ @param segmentedPager The segmented-pager object informing the delegate of this impending event.
+ @param page A page view object that segmented-pager is going to use when drawing the index.
+ @param index An index locating the page in pagerView.
+ */
+- (void)segmentedPager:(MXSegmentedPager *)segmentedPager willDisplayPage:(UIView *)page atIndex:(NSInteger)index;
+
+/**
+ Tells the delegate that the specified page was removed from the pager.
+ Use this method to detect when a page is removed from a pager view, as opposed to monitoring the view itself to see when it appears or disappears.
+ 
+ @param segmentedPager The segmented-pager object that removed the view.
+ @param page The page that was removed.
+ @param index The index of the page.
+ */
+- (void)segmentedPager:(MXSegmentedPager *)segmentedPager didEndDisplayingPage:(UIView *)page atIndex:(NSInteger)index;
 
 /**
  Asks the delegate to return the height of the segmented control in the segmented-pager.
@@ -187,12 +210,12 @@ typedef NS_ENUM(NSInteger, MXSegmentedControlPosition) {
 /**
  Delegate instance that adopt the MXSegmentedPagerDelegate.
  */
-@property (nonatomic, weak) id<MXSegmentedPagerDelegate> delegate;
+@property (nonatomic, weak) IBOutlet id<MXSegmentedPagerDelegate> delegate;
 
 /**
  Data source instance that adopt the MXSegmentedPagerDataSource.
  */
-@property (nonatomic, weak) id<MXSegmentedPagerDataSource> dataSource;
+@property (nonatomic, weak) IBOutlet id<MXSegmentedPagerDataSource> dataSource;
 
 /**
  The segmented control. cf. [HMSegmentedControl](http://cocoadocs.org/docsets/HMSegmentedControl/1.5/) for customazation.
